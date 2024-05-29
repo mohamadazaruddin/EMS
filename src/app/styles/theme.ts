@@ -2,6 +2,7 @@ import { extendTheme, ThemeConfig } from "@chakra-ui/react";
 
 import { breakpoints } from "./foundations/breakpoints";
 import { colors } from "./foundations/colors";
+import styles from "./foundations/styles";
 
 const config: ThemeConfig = {
   initialColorMode: "light",
@@ -10,8 +11,8 @@ const config: ThemeConfig = {
 const theme = extendTheme({
   config,
   fonts: {
-    heading: "Inter, sans-serif",
-    body: "Inter, sans-serif",
+    heading: "Roboto",
+    body: "Roboto",
   },
   fontSizes: {
     tiny: "0.625rem",
@@ -43,7 +44,7 @@ const theme = extendTheme({
     borderStart8: "8px",
   },
   breakpoints,
-
+  styles,
   components: {},
 });
 
