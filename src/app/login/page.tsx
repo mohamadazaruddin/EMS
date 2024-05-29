@@ -76,7 +76,8 @@ export default function Login() {
                           type="email"
                         />
                         <FormErrorMessage>
-                          {form.errors.username}
+                          {typeof form.errors.username === "string" &&
+                            form.errors.username}
                         </FormErrorMessage>
                       </FormControl>
                     )}
@@ -98,7 +99,8 @@ export default function Login() {
                           type="password"
                         />
                         <FormErrorMessage>
-                          {form?.errors?.password}
+                          {typeof form.errors.password === "string" &&
+                            form.errors.password}
                         </FormErrorMessage>
                       </FormControl>
                     )}
