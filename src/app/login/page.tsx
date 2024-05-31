@@ -17,6 +17,7 @@ import {
 import Logo from "../components/Icons/Logo";
 import { Formik, Field, Form, FieldProps, FormikHelpers } from "formik";
 import * as Yup from "yup";
+import { useRouter } from "next/navigation";
 
 const validationSchema = Yup.object({
   username: Yup.string().email("Invalid email address").required("Required"),
@@ -36,6 +37,7 @@ const initialValues: FormValues = {
 };
 
 export default function Login() {
+  const { push } = useRouter();
   return (
     <VStack m="auto" h="100%" justifyContent="center">
       <Logo />
@@ -54,6 +56,7 @@ export default function Login() {
             { setSubmitting }: FormikHelpers<FormValues>
           ) => {
             console.log(values);
+            push("/dashboard");
             setSubmitting(false);
           }}
         >
