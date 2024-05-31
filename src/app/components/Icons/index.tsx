@@ -7,3 +7,5 @@ export { default as NavTimeSheet } from "./NavTimeSheet";
 export { default as TotalEmpIcon } from "./TotalEmpIcon";
 export { default as DepartmentIcon } from "./DepartmentIcon";
 export { default as Add } from "./Add";
+export { default as SearchIcon } from "./SearchIcon";
+export { default as CalenderIcon } from "./CalenderIcon";
