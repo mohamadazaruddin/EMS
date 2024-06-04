@@ -9,3 +9,7 @@ export { default as DepartmentIcon } from "./DepartmentIcon";
 export { default as Add } from "./Add";
 export { default as SearchIcon } from "./SearchIcon";
 export { default as CalenderIcon } from "./CalenderIcon";
+export { default as MenuIcon } from "./MenuIcon";
+export { default as XlsxIcon } from "./XlsxIcon";
+export { default as Delete } from "./Delete";
+export { default as Download } from "./Download";
