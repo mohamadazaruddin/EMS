@@ -233,7 +233,7 @@ export default function TimeSheet() {
         </Formik>
       </HStack>
       <Box w="100%" mt={10}>
-        <Table />
+        <Table tableGridSize={16} />
       </Box>
     </VStack>
   );

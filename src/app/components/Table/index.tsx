@@ -48,9 +48,9 @@ export default function Table({
           bg="#fff"
           borderRadius="8px"
         >
-          {tableHeader?.map((header) => {
+          {tableHeader?.map((header, i) => {
             return (
-              <GridItem colSpan={header.colspan ? header.colspan : 2}>
+              <GridItem colSpan={header.colspan ? header.colspan : 2} key={i}>
                 {header.label}
               </GridItem>
             );
