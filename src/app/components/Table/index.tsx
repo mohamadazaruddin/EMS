@@ -40,7 +40,7 @@ export default function Table({
 }: DesktopTable) {
   return (
     <VStack w="100%">
-      {isHeader && tableHeader && (
+      {isHeader && (
         <Grid
           templateColumns={`repeat(${tableGridSize ? tableGridSize : 16}, 1fr)`}
           w="100%"
