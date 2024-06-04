@@ -1,3 +1,4 @@
+"use client";
 import { Box, VStack, HStack } from "@chakra-ui/react";
 import React from "react";
 import Sidebar from "@/app/components/Common/Sidebar";

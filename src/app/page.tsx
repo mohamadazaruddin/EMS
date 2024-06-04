@@ -1,95 +1,174 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+"use client";
+import React, { useEffect, useState } from "react";
+import {
+  Text,
+  VStack,
+  Box,
+  Flex,
+  Button,
+  Spacer,
+  Input,
+  HStack,
+  Link,
+  FormControl,
+  FormLabel,
+  FormErrorMessage,
+  useDisclosure,
+} from "@chakra-ui/react";
+
+import { Formik, Field, Form, FieldProps, FormikHelpers } from "formik";
+import * as Yup from "yup";
+import { useRouter } from "next/navigation";
+import Logo from "./components/Icons/Logo";
+import { LoginMessage } from "./components";
+
+const validationSchema = Yup.object({
+  username: Yup.string().email("Invalid email address").required("Required"),
+  password: Yup.string()
+    .min(6, "Password must be at least 6 characters")
+    .required("Required"),
+});
+
+interface FormValues {
+  username: string;
+  password: string;
+}
 
 export default function Home() {
+  const [showModal, setShowModal] = useState(false);
+  const [loginCredential, setLoginCredential] = useState({
+    email: "",
+    password: "",
+  });
+  const { onClose: closeLoginModal } = useDisclosure();
+  const { push } = useRouter();
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowModal(true);
+    }, 5000);
+    return () => clearTimeout(timer);
+  }, []);
+  const initialValues: FormValues = {
+    username: loginCredential.email || "",
+    password: loginCredential.password || "",
+  };
+  console.log("login as", loginCredential);
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <>
+      <LoginMessage
+        isOpen={!loginCredential.email.length && showModal}
+        onClose={() => {}}
+        setLoginCredential={setLoginCredential}
+      />
+      <VStack m="auto" h="100%" justifyContent="center">
+        <Logo />
+        <Text color="#091641" fontSize="4xl" fontWeight="medium" mt="4">
+          Welcome Back!
+        </Text>
+        <Text color="091641" fontSize="lg">
+          Login to your account
+        </Text>
+        <Box w="full" maxW="md">
+          <Formik
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={(
+              values: FormValues,
+              { setSubmitting }: FormikHelpers<FormValues>
+            ) => {
+              console.log(values);
+              push("/dashboard");
+              setSubmitting(false);
+            }}
           >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+            {({ isSubmitting }) => (
+              <Form>
+                <Flex flexDir="column" h="full" w="full">
+                  <Box pb="10" pt={7}>
+                    <Field name="username">
+                      {({ field, form }: FieldProps) => (
+                        <FormControl
+                          isInvalid={
+                            !!form.errors.username && !!form.touched.username
+                          }
+                        >
+                          <FormLabel htmlFor="username">Email</FormLabel>
+                          <Input
+                            {...field}
+                            id="username"
+                            placeholder="abc@gmail.com"
+                            type="email"
+                          />
+                          <FormErrorMessage>
+                            {typeof form.errors.username === "string" &&
+                              form.errors.username}
+                          </FormErrorMessage>
+                        </FormControl>
+                      )}
+                    </Field>
+                  </Box>
+                  <Box pb="3" pos="relative">
+                    <Field name="password">
+                      {({ field, form }: FieldProps) => (
+                        <FormControl
+                          isInvalid={
+                            !!form.errors.password && !!form.touched.password
+                          }
+                        >
+                          <FormLabel htmlFor="password">Password</FormLabel>
+                          <Input
+                            {...field}
+                            id="password"
+                            placeholder="****"
+                            type="password"
+                          />
+                          <FormErrorMessage>
+                            {typeof form.errors.password === "string" &&
+                              form.errors.password}
+                          </FormErrorMessage>
+                        </FormControl>
+                      )}
+                    </Field>
+                    <Box textAlign="end" mt="2">
+                      <Link
+                        textDecor="underline"
+                        color="#091641CC"
+                        mb={4}
+                        fontSize="lg"
+                        fontWeight="normal"
+                      >
+                        Forgot password?
+                      </Link>
+                    </Box>
+                  </Box>
+                  <Spacer />
+                  <Box px={10} py={4}>
+                    <Button
+                      type="submit"
+                      bg="#3BCBBE"
+                      isLoading={isSubmitting}
+                      colorScheme="teal"
+                      w="full"
+                    >
+                      Login
+                    </Button>
+                    <HStack mt="2" justifyContent="center">
+                      <Text color="gray.400" fontSize="lg" fontWeight="normal">
+                        Don’t have an account?
+                      </Text>
+                      <Link color="#3BCBBE" fontSize="lg" fontWeight="normal">
+                        Sign up
+                      </Link>
+                    </HStack>
+                  </Box>
+                </Flex>
+              </Form>
+            )}
+          </Formik>
+        </Box>
+      </VStack>
+    </>
   );
 }
