@@ -74,6 +74,7 @@ export default function Home() {
           <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
+            enableReinitialize
             onSubmit={(
               values: FormValues,
               { setSubmitting }: FormikHelpers<FormValues>
@@ -100,6 +101,7 @@ export default function Home() {
                             id="username"
                             placeholder="abc@gmail.com"
                             type="email"
+                            isDisabled={!loginCredential.email}
                           />
                           <FormErrorMessage>
                             {typeof form.errors.username === "string" &&
@@ -123,6 +125,7 @@ export default function Home() {
                             id="password"
                             placeholder="****"
                             type="password"
+                            isDisabled={!loginCredential.password}
                           />
                           <FormErrorMessage>
                             {typeof form.errors.password === "string" &&
