@@ -14,6 +14,8 @@ import {
   FormLabel,
   FormErrorMessage,
   useDisclosure,
+  useToast,
+  CloseButton,
 } from "@chakra-ui/react";
 
 import { Formik, Field, Form, FieldProps, FormikHelpers } from "formik";
@@ -21,6 +23,9 @@ import * as Yup from "yup";
 import { useRouter } from "next/navigation";
 import Logo from "./components/Icons/Logo";
 import { LoginMessage } from "./components";
+import { getSession, signIn } from "next-auth/react";
+import { LoginParamsType } from "./services/types";
+import { WarningIcon } from "@chakra-ui/icons";
 
 const validationSchema = Yup.object({
   username: Yup.string().email("Invalid email address").required("Required"),
@@ -35,7 +40,10 @@ interface FormValues {
 }
 
 export default function Home() {
+  const toast = useToast();
+  const toastId = "toast-error";
   const [showModal, setShowModal] = useState(false);
+  const toastIdRef = React.useRef(0);
   const [loginCredential, setLoginCredential] = useState({
     email: "",
     password: "",
@@ -53,7 +61,60 @@ export default function Home() {
     username: loginCredential.email || "",
     password: loginCredential.password || "",
   };
-  console.log("login as", loginCredential);
+
+  const submitHandler = (values: LoginParamsType) => {
+    console.log(values, "values");
+    try {
+      signIn("credentials", {
+        email: values.username,
+        password: values.password,
+        redirect: false,
+      }).then(async (response) => {
+        console.log(response, "---");
+        if (response?.ok) {
+          console.log(response, "response values");
+          push("/dashboard");
+        } else {
+          console.log(response, "---");
+          if (!toast.isActive(toastId)) {
+            toastIdRef.current = toast({
+              isClosable: true,
+              position: "bottom",
+              duration: 3000,
+              render: () => (
+                <HStack
+                  py="3"
+                  ps="2.5"
+                  pe="4"
+                  bg="gray.800"
+                  direction="row"
+                  alignItems="center"
+                  borderStart="6px solid"
+                  borderColor="red.500"
+                  borderRadius={0.5}
+                  role="alert"
+                  justifyContent="center"
+                >
+                  <HStack>
+                    <WarningIcon w="5" h="5" color="red.500" />
+                    <Text fontSize="md" color="contrast.200">
+                      Invalid email/username or password. Please try again.
+                    </Text>
+                  </HStack>
+
+                  <CloseButton onClick={close} />
+                </HStack>
+              ),
+            }) as number;
+          } else {
+            close();
+          }
+        }
+      });
+    } catch (error) {
+      console.log(error, "error");
+    }
+  };
 
   return (
     <>
@@ -80,8 +141,9 @@ export default function Home() {
               { setSubmitting }: FormikHelpers<FormValues>
             ) => {
               console.log(values);
-              push("/dashboard");
+
               setSubmitting(false);
+              submitHandler(values);
             }}
           >
             {({ isSubmitting }) => (
