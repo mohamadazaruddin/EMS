@@ -54,7 +54,7 @@ export default function Company() {
         border="1px solid #0000001A"
         borderRadius="6px"
       >
-        {teamData && (
+        {/* {teamData && (
           <Grid templateColumns="repeat(4, 1fr)" gap={6}>
             {teamData?.map((team, i) => {
               return (
@@ -78,7 +78,7 @@ export default function Company() {
               );
             })}
           </Grid>
-        )}
+        )} */}
       </Box>
 
       <Box w="full">
