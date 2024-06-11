@@ -190,7 +190,7 @@ const Sidebar = () => {
                   <VStack gap={0} alignItems="flex-start">
                     {item.options?.map((item, i) => {
                       return (
-                        <HStack>
+                        <HStack key={i}>
                           <Divider
                             orientation="horizontal"
                             color="#80869D"
