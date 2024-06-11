@@ -19,6 +19,7 @@ import { CalenderIcon, SearchIcon } from "@/app/components/Icons";
 import useSWRImmutable from "swr/immutable";
 import TreeChart from "@/app/components/Common/TreeChart";
 import useSWR from "swr";
+import Org from "../../../../public/org.json";
 
 export default function Company() {
   const [orgData, setOrgData] = useState();
@@ -44,15 +45,16 @@ export default function Company() {
 
   return (
     <VStack w="100%">
-      {/* <Box
+      <Box
         bg="#fff"
-        p={4}
+        px={4}
+        py="2"
         w="100%"
-        mt="4"
+        mt="3"
         border="1px solid #0000001A"
         borderRadius="6px"
       >
-        {teamData && (
+        {/* {teamData && (
           <Grid templateColumns="repeat(4, 1fr)" gap={6}>
             {teamData?.map((team, i) => {
               return (
@@ -61,13 +63,13 @@ export default function Company() {
                   justifyContent="center"
                   alignItems="center"
                   borderRight={
-                    i !== teams.length - 1 ? "2px solid #28D999" : "none"
+                    i !== team?.length - 1 ? "2px solid #28D999" : "none"
                   }
                 >
                   <GridItem
                     textAlign="center"
-                    fontSize="md"
-                    fontWeight="normal"
+                    fontSize="sm"
+                    fontWeight="medium"
                     color="#555D7B"
                   >
                     {team.teamName}
@@ -76,11 +78,11 @@ export default function Company() {
               );
             })}
           </Grid>
-        )}
-      </Box> */}
+        )} */}
+      </Box>
 
       <Box w="full">
-        <TreeChart data={orgData} />
+        <TreeChart data={Org.employees} />
       </Box>
     </VStack>
   );

@@ -19,10 +19,10 @@ const TreeChart = (props: any) => {
         chart = new OrgChart()
           .container(containerRef.current ? containerRef.current : "")
           .data(chartData)
-          .nodeWidth(() => 150)
+          .nodeWidth(() => 200)
           .nodeHeight(() => 60)
           .childrenMargin(() => 50)
-          .compactMarginBetween(() => 35)
+          .compactMarginBetween(() => 55)
           .compactMarginPair(() => 30)
           .neighbourMargin(() => 20)
           .initialZoom(0.6)
@@ -58,13 +58,17 @@ const TreeChart = (props: any) => {
             });
             d3.selectAll(".node-rect").attr("display", "none");
             return `
-                <div style="width: 100%; height: 100%; background-color: #fff;color:#000; padding: 10px; border-radius: 8px;border:${
-                  d.data._upToTheRootHighlighted &&
-                  "3px solid #a6dd40 !important"
-                }">
-                Id :${d.data.id}</br>
-                   Level :${d.data.email}</br>
-                ${d?.data?.firstName}</div>
+<div class="card">
+        <div class="profile-img">
+            <image src="${d?.data?.profileImage}" />
+        </div>
+        <div class="info">
+            <p class="emp-name">${
+              d?.data?.firstname + " " + d?.data?.lastname
+            }</p>
+            <p class="emp-role">${d?.data?.role.roleName}</p>
+        </div>
+    </div>
 `;
           })
           .render();
