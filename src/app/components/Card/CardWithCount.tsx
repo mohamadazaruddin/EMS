@@ -14,7 +14,7 @@ export default function CardWithCount({
   label,
 }: CradWithCountProps) {
   return (
-    <BasicCard bg="#FFFFFF" p="10">
+    <BasicCard bg="#FFFFFF" p="4">
       {icon}
       <Text fontSize="6xl" color="#091641" fontFamily="bold">
         {count}

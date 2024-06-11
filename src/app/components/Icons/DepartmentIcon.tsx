@@ -10,7 +10,7 @@ export default function DepartmentIcon({ ...rest }: IconProps) {
       xmlns="http://www.w3.org/2000/svg"
       {...rest}
     >
-      <g clip-path="url(#clip0_1_4035)">
+      <g clipPath="url(#clip0_1_4035)">
         <path
           fill-rule="evenodd"
           clip-rule="evenodd"

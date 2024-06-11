@@ -32,7 +32,7 @@ export default function Dashboard() {
   ];
 
   return (
-    <VStack p="10">
+    <VStack mt="10">
       <Box w="100%">
         <Text fontSize="4xl" color="primary.200" mb={2} fontWeight="medium">
           Welcome, Azar

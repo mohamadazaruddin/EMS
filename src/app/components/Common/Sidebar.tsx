@@ -101,7 +101,7 @@ const Sidebar = () => {
       textAlign="center"
       pt={10}
     >
-      <Text fontSize="xl" fontWeight="bold" mb="10">
+      <Text fontSize="xl" fontWeight="bold" mb="5">
         <Logo />
       </Text>
       <VStack as="nav">
@@ -110,6 +110,9 @@ const Sidebar = () => {
             <Link
               href={item.href}
               bg={pathname === item.href ? "#3BCBBE" : "#fff"}
+              _hover={{
+                bg: pathname === item.href ? "#3BCBBE" : "primary.100",
+              }}
               color={
                 pathname === item.href
                   ? "#fff"
@@ -118,10 +121,12 @@ const Sidebar = () => {
                   : "#2C365C"
               }
               w="100%"
-              h="50px"
               borderRadius="8px"
-              p="4"
+              px="4"
+              py="3"
               key={i}
+              fontSize="sm"
+              fontWeight="medium"
             >
               <Flex>
                 {item.icon}

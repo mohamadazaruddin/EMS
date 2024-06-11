@@ -4,7 +4,7 @@ export default function Logo({ ...rest }: IconProps) {
   return (
     <Icon
       width="102"
-      height="51"
+      height="41"
       viewBox="0 0 102 51"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

@@ -21,6 +21,7 @@ import * as Yup from "yup";
 import { useRouter } from "next/navigation";
 import Logo from "./components/Icons/Logo";
 import { LoginMessage } from "./components";
+import useSWRImmutable from "swr/immutable";
 
 const validationSchema = Yup.object({
   username: Yup.string().email("Invalid email address").required("Required"),
@@ -42,6 +43,7 @@ export default function Home() {
   });
   const { onClose: closeLoginModal } = useDisclosure();
   const { push } = useRouter();
+  const { data } = useSWRImmutable("https://ems-be-xxuk.onrender.com");
 
   useEffect(() => {
     const timer = setTimeout(() => {
