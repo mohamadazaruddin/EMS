@@ -22,6 +22,8 @@ import { useRouter } from "next/navigation";
 import Logo from "./components/Icons/Logo";
 import { LoginMessage } from "./components";
 
+import { getSession, signIn } from "next-auth/react";
+
 const validationSchema = Yup.object({
   username: Yup.string().email("Invalid email address").required("Required"),
   password: Yup.string()
@@ -53,7 +55,19 @@ export default function Home() {
     username: loginCredential.email || "",
     password: loginCredential.password || "",
   };
-  console.log("login as", loginCredential);
+  const submitHandler = (values: FormValues) => {
+    signIn("credentials", {
+      email: values.username,
+      password: values.password,
+    }).then(async (response) => {
+      console.log(response, "response");
+      if (response?.ok) {
+        console.log(response, "response");
+      } else {
+        console.log(response, "response error");
+      }
+    });
+  };
 
   return (
     <>
@@ -80,8 +94,9 @@ export default function Home() {
               { setSubmitting }: FormikHelpers<FormValues>
             ) => {
               console.log(values);
-              push("/dashboard");
-              setSubmitting(false);
+              submitHandler(values);
+              // push("/dashboard");
+              // setSubmitting(false);
             }}
           >
             {({ isSubmitting }) => (
