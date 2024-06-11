@@ -148,7 +148,6 @@ const Sidebar = () => {
       bg="#FFF"
       p="4"
       textAlign="center"
-      pt={10}
     >
       <Text fontSize="xl" fontWeight="bold" mb="5">
         <Logo />
