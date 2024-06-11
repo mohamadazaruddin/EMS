@@ -13,9 +13,9 @@ export default function TodayDate() {
 
   const formattedDate = today.toLocaleDateString("en-GB", options);
   return (
-    <Flex bg="#F2F2FD" borderRadius="16px" p="4" ps="6">
-      <CalenderIcon />
-      <Text ms="2" color="#111111" fontSize="sm" fontWeight="medium">
+    <Flex bg="#F2F2FD" borderRadius="16px" px="3" py="1" align="center">
+      <CalenderIcon w="3.5" h="3.5" />
+      <Text ms="2" color="#111111" fontSize="xs" fontWeight="medium">
         {formattedDate}
       </Text>
     </Flex>

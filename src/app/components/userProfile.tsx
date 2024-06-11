@@ -1,13 +1,17 @@
 import React from "react";
-import { Box, Flex, Image, Text } from "@chakra-ui/react";
+import { Avatar, Box, Flex, Image, Text } from "@chakra-ui/react";
 
 export default function UserProfile() {
   return (
     <Flex alignItems="center">
-      <Image src="./Images/profile.png" borderRadius="50%" h="35px" w="35px" />
+      <Avatar size="sm" name="jessie" src="./Images/peoples/jessie.svg" />
       <Box ms="2">
-        <Text>Mohamad Azaruddin</Text>
-        <Text>UI Developer</Text>
+        <Text fontSize="sm" color="brand.800" fontWeight="normal">
+          Mohamad Azaruddin
+        </Text>
+        <Text fontSize="xs" fontWeight="normal">
+          UI Developer
+        </Text>
       </Box>
     </Flex>
   );
