@@ -27,6 +27,9 @@ export default function RootLayout({
   };
   return (
     <html lang="en">
+      <head>
+        <title>EMS</title>
+      </head>
       <body className={inter.className}>
         <SWRConfig
           value={{

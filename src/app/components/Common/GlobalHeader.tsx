@@ -29,7 +29,13 @@ export default function GlobalHeader() {
 
       <Box>
         <InputGroup bg="#F2F2FD" borderRadius="16px" w="400px">
-          <Input placeholder="Search Employee" h="34px" />
+          <Input
+            placeholder="Search Employee"
+            h="34px"
+            _placeholder={{
+              fontSize: "xs",
+            }}
+          />
           <InputRightElement>
             <SearchIcon h="18px" w="18px" top="-3px" />
           </InputRightElement>
