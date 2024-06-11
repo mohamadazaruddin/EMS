@@ -13,3 +13,6 @@ export { default as MenuIcon } from "./MenuIcon";
 export { default as XlsxIcon } from "./XlsxIcon";
 export { default as Delete } from "./Delete";
 export { default as Download } from "./Download";
+export { default as NavTeams } from "./NavTeams";
+export { default as NavChapters } from "./NavChapters";
+export { default as NavOrganization } from "./NavOrganization";
