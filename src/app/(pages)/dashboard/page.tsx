@@ -62,7 +62,7 @@ export default function Dashboard() {
         })}
       </Grid>
       <Box w="100%" mt={10}>
-        <EventCalender />
+        {/* <EventCalender /> */}
       </Box>
     </VStack>
   );
