@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { SWRConfig } from "swr";
 import { SessionProvider } from "./context";
+import "react-big-calendar/lib/css/react-big-calendar.css";
 
 const inter = Inter({ subsets: ["latin"] });
 

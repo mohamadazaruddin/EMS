@@ -31,6 +31,7 @@ export type User = {
   id: string;
   userName?: string;
 };
+
 export type Appointment = {
   id: number;
   status: string;
