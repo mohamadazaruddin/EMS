@@ -61,7 +61,16 @@ export default function Dashboard() {
           );
         })}
       </Grid>
-      <Box w="100%" mt={10}>
+      <Box w="100%" mt={8}>
+        <Text
+          fontSize="32px"
+          color="brand.800"
+          m="0"
+          mb={4}
+          fontWeight="medium"
+        >
+          Upcoming Events of Oct 2023
+        </Text>
         <EventCalender />
       </Box>
     </VStack>
