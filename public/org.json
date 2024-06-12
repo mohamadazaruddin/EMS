@@ -1,0 +1,274 @@
+{
+  "employees": [
+    {
+      "id": 1,
+      "uuid": null,
+      "email": "Maxwell@abc.com",
+      "password": "Maxwell@123",
+      "firstname": "Maxwell",
+      "lastname": "Stone",
+      "profileImage": "/images/peoples/adam.svg",
+      "token": "",
+      "contact_no": "8504536985",
+      "parentId": "",
+      "role": {
+        "id": 5,
+        "uuid": null,
+        "roleName": "ceo"
+      },
+      "project": {
+        "id": 5,
+        "uuid": null,
+        "projectName": "management"
+      },
+      "team": {
+        "id": 5,
+        "uuid": null,
+        "teamName": "management"
+      }
+    },
+    {
+      "id": 2,
+      "uuid": null,
+      "email": "Amelia@abc.com",
+      "password": "Amelia@123",
+      "firstname": "Amelia",
+      "lastname": "Rivers",
+      "profileImage": "/images/peoples/sara.svg",
+      "token": "",
+      "contact_no": "8504536455",
+      "parentId": 1,
+      "role": {
+        "id": 1,
+        "uuid": null,
+        "roleName": "quality analyst"
+      },
+      "project": {
+        "id": 1,
+        "uuid": null,
+        "projectName": "Quantum Quest"
+      },
+      "team": {
+        "id": 1,
+        "uuid": null,
+        "teamName": "Code Crusaders"
+      }
+    },
+    {
+      "id": 3,
+      "uuid": null,
+      "email": "Victoria@abc.com",
+      "password": "Victoria@123",
+      "firstname": "Victoria",
+      "lastname": "Sterling",
+      "profileImage": "/images/peoples/jessie.svg",
+      "token": "",
+      "contact_no": "8504536455",
+      "parentId": 2,
+      "role": {
+        "id": 1,
+        "uuid": null,
+        "roleName": "quality analyst"
+      },
+      "project": {
+        "id": 1,
+        "uuid": null,
+        "projectName": "Quantum Quest"
+      },
+      "team": {
+        "id": 1,
+        "uuid": null,
+        "teamName": "Code Crusaders"
+      }
+    },
+    {
+      "id": 4,
+      "uuid": null,
+      "email": "Nolan@abc.com",
+      "password": "Nolan@123",
+      "firstname": "Nolan",
+      "lastname": "Hart",
+      "profileImage": "/images/peoples/jacob.svg",
+      "token": "",
+      "contact_no": "98523674102",
+      "parentId": 1,
+      "role": {
+        "id": 2,
+        "uuid": null,
+        "roleName": "frontend developer"
+      },
+      "project": {
+        "id": 2,
+        "uuid": null,
+        "projectName": "Cyber Fusion"
+      },
+      "team": {
+        "id": 2,
+        "uuid": null,
+        "teamName": "Data Dynamos"
+      }
+    },
+    {
+      "id": 5,
+      "uuid": null,
+      "email": "Harper@abc.com",
+      "password": "Harper@123",
+      "firstname": "Harper",
+      "lastname": "Steele",
+      "profileImage": "/images/peoples/noah.svg",
+      "token": "",
+      "contact_no": "9852364170",
+      "parentId": 1,
+      "role": {
+        "id": 3,
+        "uuid": null,
+        "roleName": "backend developer"
+      },
+      "project": {
+        "id": 3,
+        "uuid": null,
+        "projectName": "Innovation Drive"
+      },
+      "team": {
+        "id": 3,
+        "uuid": null,
+        "teamName": "Byte Brigade"
+      }
+    },
+    {
+      "id": 6,
+      "uuid": null,
+      "email": "Isabella@abc.com",
+      "password": "Isabella@123",
+      "firstname": "Isabella",
+      "lastname": "Crane",
+      "profileImage": "/images/peoples/linda.svg",
+      "token": "",
+      "contact_no": "8652710254",
+      "parentId": 1,
+      "role": {
+        "id": 4,
+        "uuid": null,
+        "roleName": "ux designer"
+      },
+      "project": {
+        "id": 4,
+        "uuid": null,
+        "projectName": "Digital Nexus"
+      },
+      "team": {
+        "id": 4,
+        "uuid": null,
+        "teamName": "Tech Titans"
+      }
+    },
+    {
+      "id": 9,
+      "uuid": null,
+      "email": "jacob@abc.com",
+      "password": "jacob@123",
+      "firstname": "Jacob",
+      "lastname": "mathew",
+      "profileImage": "/images/peoples/jacob.svg",
+      "token": null,
+      "contact_no": "9586589620",
+      "parentId": 1,
+      "role": {
+        "id": 3,
+        "uuid": null,
+        "roleName": "backend developer"
+      },
+      "project": {
+        "id": 2,
+        "uuid": null,
+        "projectName": "Cyber Fusion"
+      },
+      "team": {
+        "id": 2,
+        "uuid": null,
+        "teamName": "Data Dynamos"
+      }
+    },
+    {
+      "id": 10,
+      "uuid": null,
+      "email": "Sara@abc.com",
+      "password": "sara@123",
+      "firstname": "Sara",
+      "lastname": "jane",
+      "profileImage": "/images/peoples/sara.svg",
+      "token": null,
+      "contact_no": "8520147963",
+      "parentId": 3,
+      "role": {
+        "id": 2,
+        "uuid": null,
+        "roleName": "frontend developer"
+      },
+      "project": {
+        "id": 3,
+        "uuid": null,
+        "projectName": "Innovation Drive"
+      },
+      "team": {
+        "id": 1,
+        "uuid": null,
+        "teamName": "Code Crusaders"
+      }
+    },
+    {
+      "id": 11,
+      "uuid": null,
+      "email": "adam@abc.com",
+      "password": "adam@123",
+      "firstname": "Adam",
+      "lastname": "Griffen",
+      "profileImage": "/images/peoples/adam.svg",
+      "token": null,
+      "contact_no": "7702058741",
+      "parentId": 2,
+      "role": {
+        "id": 1,
+        "uuid": null,
+        "roleName": "quality analyst"
+      },
+      "project": {
+        "id": 1,
+        "uuid": null,
+        "projectName": "Quantum Quest"
+      },
+      "team": {
+        "id": 4,
+        "uuid": null,
+        "teamName": "Tech Titans"
+      }
+    },
+    {
+      "id": 12,
+      "uuid": null,
+      "email": "linda@abc.com",
+      "password": "linda@123",
+      "firstname": "Linda",
+      "lastname": "rose",
+      "profileImage": "/images/peoples/linda.svg",
+      "token": null,
+      "contact_no": "8702058741",
+      "parentId": 4,
+      "role": {
+        "id": 2,
+        "uuid": null,
+        "roleName": "frontend developer"
+      },
+      "project": {
+        "id": 3,
+        "uuid": null,
+        "projectName": "Innovation Drive"
+      },
+      "team": {
+        "id": 1,
+        "uuid": null,
+        "teamName": "Code Crusaders"
+      }
+    }
+  ]
+}

@@ -49,7 +49,7 @@ export default function EditProfile() {
     <VStack bg="#fff" p={6} m={5} h="max-content">
       <VStack w="100%">
         <VStack w="50%" mb={10}>
-          <Image src="./Images/profile.png" borderRadius="50%" />
+          <Image src="./images/profile.png" borderRadius="50%" />
           <Button
             mt={5}
             type="submit"

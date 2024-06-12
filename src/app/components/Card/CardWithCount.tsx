@@ -14,12 +14,12 @@ export default function CardWithCount({
   label,
 }: CradWithCountProps) {
   return (
-    <BasicCard bg="#FFFFFF" p="10">
+    <BasicCard bg="#FFFFFF" p="4">
       {icon}
-      <Text fontSize="6xl" color="#091641" fontFamily="bold">
+      <Text fontSize="48px" color="#091641" fontFamily="bold" mt="2">
         {count}
       </Text>
-      <Box fontSize="2xl" color="#2C365C" fontFamily="medium">
+      <Box fontSize="lg" color="#2C365C" fontFamily="bold">
         <Text>{label.split(" ")[0]}</Text>
         <Text>{label.split(" ")[1]}</Text>
       </Box>
