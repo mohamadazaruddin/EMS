@@ -3,6 +3,7 @@ import CustomChakraProvider from "./components/CustomChakraProvider";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { SWRConfig } from "swr";
+import { SessionProvider } from "./context";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -32,13 +33,15 @@ export default function RootLayout({
         <link rel="icon" href="/images/favicon.ico" />
       </head>
       <body className={inter.className}>
-        <SWRConfig
-          value={{
-            fetcher,
-          }}
-        >
-          <CustomChakraProvider>{children}</CustomChakraProvider>
-        </SWRConfig>
+        <SessionProvider>
+          <SWRConfig
+            value={{
+              fetcher,
+            }}
+          >
+            <CustomChakraProvider>{children}</CustomChakraProvider>
+          </SWRConfig>
+        </SessionProvider>
       </body>
     </html>
   );

@@ -6,6 +6,7 @@ import {
   DepartmentIcon,
   NavCompany,
 } from "../../components/Icons";
+import EventCalender from "@/app/components/Calender/EventCalender";
 
 export default function Dashboard() {
   const countData = [
@@ -60,6 +61,9 @@ export default function Dashboard() {
           );
         })}
       </Grid>
+      <Box w="100%" mt={10}>
+        {/* <EventCalender /> */}
+      </Box>
     </VStack>
   );
 }

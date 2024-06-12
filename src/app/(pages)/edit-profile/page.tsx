@@ -69,7 +69,6 @@ export default function EditProfile() {
               values: FormValues,
               { setSubmitting }: FormikHelpers<FormValues>
             ) => {
-              console.log(values);
               setSubmitting(false);
             }}
           >

@@ -14,6 +14,7 @@ import {
   FormLabel,
   FormErrorMessage,
   useDisclosure,
+  useToast,
 } from "@chakra-ui/react";
 
 import { Formik, Field, Form, FieldProps, FormikHelpers } from "formik";
@@ -22,6 +23,8 @@ import { useRouter } from "next/navigation";
 import Logo from "./components/Icons/Logo";
 import { LoginMessage } from "./components";
 import useSWRImmutable from "swr/immutable";
+
+import { getSession, signIn, useSession } from "next-auth/react";
 
 const validationSchema = Yup.object({
   username: Yup.string().email("Invalid email address").required("Required"),
@@ -45,6 +48,9 @@ export default function Home() {
   const { push } = useRouter();
   const { data } = useSWRImmutable("https://ems-be-xxuk.onrender.com");
 
+  const userData = useSession();
+  const toast = useToast();
+
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowModal(true);
@@ -55,8 +61,33 @@ export default function Home() {
     username: loginCredential.email || "",
     password: loginCredential.password || "",
   };
-  console.log("login as", loginCredential);
-
+  const submitHandler = (values: FormValues) => {
+    signIn("credentials", {
+      username: values.username,
+      password: values.password,
+      redirect: false,
+    })
+      .then(async (response) => {
+        if (response?.ok) {
+          toast({
+            title: "login successfully",
+            status: "success",
+            isClosable: true,
+          });
+          push("/dashboard");
+        } else {
+          toast({
+            title: "login Failed, please try again",
+            status: "error",
+            isClosable: true,
+          });
+          console.error("Sign-in error", response);
+        }
+      })
+      .catch((error) => {
+        console.error("Error during sign-in", error);
+      });
+  };
   return (
     <>
       <LoginMessage
@@ -82,8 +113,9 @@ export default function Home() {
               { setSubmitting }: FormikHelpers<FormValues>
             ) => {
               console.log(values);
-              push("/dashboard");
-              setSubmitting(false);
+              submitHandler(values);
+              // push("/dashboard");
+              // setSubmitting(false);
             }}
           >
             {({ isSubmitting }) => (
