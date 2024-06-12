@@ -10,6 +10,10 @@ import { NextApiRequest } from "next";
 interface AuthenticationResponse {
   email: string;
   accessToken: string;
+  id: number;
+  firstname: string;
+  lastname: string;
+  profileImage: string;
 }
 export const AuthOptions: AuthOptionsType = {
   providers: [
@@ -24,7 +28,6 @@ export const AuthOptions: AuthOptionsType = {
         req: Pick<RequestInternal, "body" | "query" | "headers" | "method">
       ): Promise<any> {
         try {
-          console.log(credentials, "credentials");
           const httpClient = new MyHTTPClient(undefined, undefined, {
             authRequired: false,
           });
@@ -36,8 +39,12 @@ export const AuthOptions: AuthOptionsType = {
 
             if (response) {
               return {
-                id: response?.email,
+                id: response?.id,
                 accessToken: response.accessToken,
+                email: response.email,
+                firstname: response.firstname,
+                lastname: response.lastname,
+                profileImage: response.profileImage,
               };
             } else {
               throw new Error("Invalid username or password");
@@ -77,8 +84,8 @@ export const AuthOptions: AuthOptionsType = {
       if (user) {
         return {
           ...token,
-          id: user.email,
-          name: user.email,
+          id: user.id,
+          name: user.firstname,
           email: user.email,
           accessToken: user.accessToken,
         };
