@@ -124,3 +124,38 @@ a {
   color: #00000080;
   margin: 0;
 }
+
+.event-day {
+  background-color: rgb(9, 207, 9) !important;
+  color: white !important;
+}
+
+.rbc-month-view {
+  height: 100vh;
+}
+.rbc-month-view{ display: block !important;}
+
+.rbc-event-content{
+  color: #C20000;
+  background-color: #FFE5E5;
+  height: 70px;
+  width: 100px;
+}
+
+.rbc-event{
+  background-color: #FFE5E5 !important;
+}
+
+.rbc-month-header{
+height: 50px;
+}
+.rbc-header{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+}
+.rbc-date-cell{
+  text-align: center;
+}

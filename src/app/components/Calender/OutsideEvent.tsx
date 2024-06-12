@@ -1,4 +1,6 @@
 import { Box, BoxProps } from "@chakra-ui/react";
+import "react-big-calendar/lib/css/react-big-calendar.css";
+import "react-big-calendar/lib/addons/dragAndDrop/styles.css";
 
 export default function OutsideEvent({ children, ...rest }: BoxProps) {
   return (

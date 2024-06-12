@@ -1,125 +1,54 @@
 "use client";
+import {
+  Calendar as BigCalendar,
+  momentLocalizer,
+  Views,
+  View,
+} from "react-big-calendar";
 import moment from "moment";
-import { useCallback, useState } from "react";
-import { EVENTS } from "../../utils/contstant";
-import "react-big-calendar/lib/css/react-big-calendar.css";
-import "react-big-calendar/lib/addons/dragAndDrop/styles.css";
+import { useState } from "react";
 
-import withDragAndDrop from "react-big-calendar/lib/addons/dragAndDrop";
-import "react-big-calendar/lib/addons/dragAndDrop/styles.css";
-import { Calendar as BigCalendar, stringOrDate } from "react-big-calendar";
-import { Appointment, EventItem } from "../../services/types";
-import { props } from "./props";
-import "./index.css";
-import { Box, Flex } from "@chakra-ui/react";
-import OutsideEvent from "./OutsideEvent";
-import AppointmentEvent from "./AppointmentEvent";
+const localizer = momentLocalizer(moment);
 
-const DnDCalendar = withDragAndDrop<EventItem>(BigCalendar);
+const events = [
+  {
+    start: moment("2024-06-06").toDate(),
+    end: moment("2024-06-06").toDate(),
+    title: "WeekOff",
+  },
+  {
+    start: moment("2023-01-10T10:00:00").toDate(),
+    end: moment("2023-01-10T11:00:00").toDate(),
+    title: "WeekOff",
+  },
+  {
+    start: moment("2023-06-10T10:00:00").toDate(),
+    end: moment("2023-06-10T11:00:00").toDate(),
+    title: "WeekOff",
+  },
+];
 
-export default function EventCalender() {
-  const [events, setEvents] = useState(EVENTS);
-
-  const onChangeEventTime = useCallback(
-    ({
-      event,
-      start,
-      end,
-      resourceId,
-    }: {
-      event: EventItem;
-      start: stringOrDate;
-      end: stringOrDate;
-      resourceId: number;
-    }) => {
-      setEvents((prevEvents) =>
-        prevEvents.map((prevEvent) =>
-          prevEvent?.data?.appointment?.id === event?.data?.appointment?.id
-            ? { ...event, start, end, resourceId }
-            : prevEvent
-        )
-      );
-    },
-    []
-  );
-
-  const [draggedEvent, setDraggedEvent] = useState<
-    Appointment | "undroppable"
-  >();
-
-  const onDroppedFromOutside = useCallback(
-    ({
-      start,
-      end,
-      resource,
-    }: {
-      start: stringOrDate;
-      end: stringOrDate;
-      resource: number;
-    }) => {
-      if (draggedEvent === "undroppable") return;
-      setEvents((prevEvents) => [
-        ...prevEvents,
-        {
-          start,
-          end,
-          resourceId: resource,
-          data: { appointment: draggedEvent },
-          isDraggable: true,
-          isResizable: true,
-        },
-      ]);
-    },
-    [draggedEvent]
-  );
-
-  const dummyAppointment = {
-    id: 3,
-    status: "CI",
-    location: "Connecticut",
-    resource: "Alex Hales",
-    address: "1241 E Main St\n Stamford\n CT 06902\n United States",
-  };
-
-  const resources = [
-    { id: 1, title: "Dr Graff" },
-    { id: 2, title: "Dr Alex" },
-    { id: 3, title: "Dr Michelle" },
-  ];
+export default function Calendar() {
+  // const [view, setView] = useState(Views.MONTH);
+  const [date, setDate] = useState(new Date());
 
   return (
-    <Flex p={2} gap={4} height="100%" width="100%" direction={"column"}>
-      <Box>
-        <Flex gap={4}>
-          <Box
-            width={200}
-            cursor="pointer"
-            onDragStart={() => setDraggedEvent(dummyAppointment)}
-            draggable
-          >
-            <AppointmentEvent appointment={dummyAppointment} />
-          </Box>
-          <OutsideEvent
-            onDragStart={() => setDraggedEvent("undroppable")}
-            draggable
-          >
-            Draggable but not for calendar.
-          </OutsideEvent>
-        </Flex>
-      </Box>
-
-      <Box flex="1" overflow="auto" width="100%">
-        <DnDCalendar
-          {...props}
-          events={events}
-          resources={resources}
-          draggableAccessor={(event) => !!event.isDraggable}
-          resizableAccessor={"isResizable"}
-          // onEventDrop={onChangeEventTime}
-          // onEventResize={onChangeEventTime}
-          // onDropFromOutside={onDroppedFromOutside}
-        />
-      </Box>
-    </Flex>
+    <BigCalendar
+      localizer={localizer}
+      defaultView={Views.MONTH}
+      defaultDate={moment().toDate()}
+      style={{ height: 100, width: "100%" }} // Adjusted height to 500 for better visibility
+      view={Views.MONTH}
+      date={date}
+      // onView={(view) => setView(view)}
+      onNavigate={(date) => setDate(date)}
+      events={events}
+      titleAccessor="title" // Ensure the title is accessed correctly
+      views={{
+        month: true,
+        day: false,
+      }}
+      messages={{ year: "Year" } as any}
+    />
   );
 }
