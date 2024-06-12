@@ -48,3 +48,12 @@ export type EventItem = {
   isResizable?: boolean;
   resourceId?: number;
 };
+
+export type postTaskPayload = {
+  taskName: string;
+  estimation: number;
+  completed: number;
+  employee: number;
+  project: number;
+  date: string;
+};

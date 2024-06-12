@@ -1,4 +1,4 @@
-import { Grid, GridItem, HStack, VStack } from "@chakra-ui/react";
+import { Box, Grid, GridItem, HStack, VStack } from "@chakra-ui/react";
 import React from "react";
 
 type DesktopTable = {
@@ -26,10 +26,10 @@ type bodyType = {
 };
 
 type TableHeaderType = {
-  headerSize: number;
+  headerSize?: number;
   label: string;
   colspan?: number;
-  style: {};
+  style?: {};
 };
 
 export default function Table({
@@ -55,12 +55,12 @@ export default function Table({
               </GridItem>
             );
           })}
-          <GridItem colSpan={2}>Date</GridItem>
+          {/* <GridItem colSpan={2}>Date</GridItem>
           <GridItem colSpan={5}>Task</GridItem>
           <GridItem colSpan={3}>Project</GridItem>
           <GridItem colSpan={2}>Estimated</GridItem>
           <GridItem colSpan={2}>Completed</GridItem>
-          <GridItem colSpan={2}>Remaining</GridItem>
+          <GridItem colSpan={2}>Remaining</GridItem> */}
         </Grid>
       )}
 
@@ -72,14 +72,41 @@ export default function Table({
         bg="#fff"
         borderRadius="8px"
       >
-        <GridItem colSpan={2}>16 Oct 2023</GridItem>
+        {tableBodyData?.map((subArray: any) =>
+          subArray?.map(
+            (
+              data: {
+                value: string;
+                colspan?: number;
+                style: {};
+                labelColor?: string;
+              },
+              i: number
+            ) => {
+              return (
+                <GridItem key={i} colSpan={data.colspan ? data.colspan : 2}>
+                  {data.value}
+                </GridItem>
+              );
+            }
+          )
+        )}
+        {/* {tableBodyData?.map((data) => {
+          return (
+            <GridItem colSpan={data.colspan ? data.colspan : 2}>
+              {console.log(data, "data")}
+              {data.value}
+            </GridItem>
+          );
+        })} */}
+        {/* <GridItem colSpan={2}>16 Oct 2023</GridItem>
         <GridItem colSpan={5}>
           ui development of header and journey component....
         </GridItem>
         <GridItem colSpan={3}>Arya Exports</GridItem>
         <GridItem colSpan={2}>9</GridItem>
         <GridItem colSpan={2}>6</GridItem>
-        <GridItem colSpan={2}>3</GridItem>
+        <GridItem colSpan={2}>3</GridItem> */}
       </Grid>
     </VStack>
   );
