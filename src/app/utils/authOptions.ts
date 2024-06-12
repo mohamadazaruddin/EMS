@@ -1,11 +1,15 @@
-import type { AuthOptions as AuthOptionsType } from "next-auth";
+import type {
+  AuthOptions as AuthOptionsType,
+  RequestInternal,
+  User,
+} from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
 import { MyHTTPClient } from "../services";
+import { NextApiRequest } from "next";
 interface AuthenticationResponse {
-  email: string; // Assuming email is a string
-  accessToken: string; // Assuming accessToken is a string
-  // Add any other properties if present in the actual response
+  email: string;
+  accessToken: string;
 }
 export const AuthOptions: AuthOptionsType = {
   providers: [
@@ -15,31 +19,31 @@ export const AuthOptions: AuthOptionsType = {
         username: { label: "Username", type: "text" },
         password: { label: "Password", type: "password" },
       },
-      async authorize(credentials: any) {
-        console.log("try", "trytry");
+      async authorize(
+        credentials: any,
+        req: Pick<RequestInternal, "body" | "query" | "headers" | "method">
+      ): Promise<any> {
         try {
+          console.log(credentials, "credentials");
           const httpClient = new MyHTTPClient(undefined, undefined, {
             authRequired: false,
           });
+          if (credentials) {
+            const response = (await httpClient.auth.login({
+              username: credentials.username,
+              password: credentials.password,
+            })) as AuthenticationResponse;
 
-          const response = (await httpClient.auth.login({
-            username: credentials.username,
-            password: credentials.password,
-          })) as AuthenticationResponse;
-
-          if (response) {
-            console.log(response, "responseresponse");
-            // Assuming your server returns a token
-            return {
-              id: response?.email,
-              token: response?.accessToken,
-            };
-          } else {
-            // Authentication failed
-            throw new Error("Invalid username or password");
+            if (response) {
+              return {
+                id: response?.email,
+                accessToken: response.accessToken,
+              };
+            } else {
+              throw new Error("Invalid username or password");
+            }
           }
         } catch (error) {
-          console.error("Authentication error:", error);
           return null;
         }
       },
@@ -58,7 +62,6 @@ export const AuthOptions: AuthOptionsType = {
   },
   callbacks: {
     async session({ session, token }) {
-      console.log("Session callback:", { session, token });
       return {
         ...session,
         user: {
@@ -71,15 +74,13 @@ export const AuthOptions: AuthOptionsType = {
       };
     },
     async jwt({ token, user }) {
-      // Merge user information into the token
       if (user) {
-        console.log("if JWT callback:", { token, user });
         return {
           ...token,
           id: user.email,
           name: user.email,
           email: user.email,
-          accessToken: user.token,
+          accessToken: user.accessToken,
         };
       }
       return token;

@@ -25,7 +25,6 @@ import { usePathname } from "next/navigation";
 
 const Sidebar = () => {
   const pathname = usePathname();
-  console.log(pathname, "asPath");
   const siderBarItem = [
     {
       label: "Dashboard",

@@ -115,9 +115,9 @@ export default function EventCalender() {
           resources={resources}
           draggableAccessor={(event) => !!event.isDraggable}
           resizableAccessor={"isResizable"}
-          onEventDrop={onChangeEventTime}
-          onEventResize={onChangeEventTime}
-          onDropFromOutside={onDroppedFromOutside}
+          // onEventDrop={onChangeEventTime}
+          // onEventResize={onChangeEventTime}
+          // onDropFromOutside={onDroppedFromOutside}
         />
       </Box>
     </Flex>

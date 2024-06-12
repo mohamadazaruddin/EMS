@@ -24,8 +24,10 @@ export default function AppointmentEvent({
         </Flex>
       </Flex>
       <Box mt={4}>
-        {address.split("\n").map((add) => (
-          <Text fontSize="xs">{add}</Text>
+        {address.split("\n").map((add, i) => (
+          <Text fontSize="xs" key={i}>
+            {add}
+          </Text>
         ))}
       </Box>
     </Box>
