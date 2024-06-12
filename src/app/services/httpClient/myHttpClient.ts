@@ -4,9 +4,11 @@ import { NextRequest, NextResponse } from "next/server";
 import { Login } from "../auth";
 import { ApiHandler, MyClientOptions } from "../types";
 import { IncomingMessage, ServerResponse } from "http";
+import { GetData, PostTaskData, GetOptions } from "../";
 
 export class MyHTTPClient {
   public auth;
+  public timesheet;
 
   constructor(
     req?: NextRequest | IncomingMessage,
@@ -62,6 +64,11 @@ export class MyHTTPClient {
 
     this.auth = {
       login: withApiClient(Login),
+    };
+    this.timesheet = {
+      GetData: withApiClient(GetData),
+      PostTaskData: withApiClient(PostTaskData),
+      GetOptions: withApiClient(GetOptions),
     };
   }
 }

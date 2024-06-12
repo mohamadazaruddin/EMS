@@ -14,12 +14,22 @@ import {
   Input,
   Select,
   VStack,
+  useToast,
 } from "@chakra-ui/react";
 import { Field, FieldProps, Form, Formik, FormikHelpers } from "formik";
+import ky from "ky";
+import { useSession } from "next-auth/react";
 import React from "react";
+import useSWR from "swr";
 import * as Yup from "yup";
 
-const validationSchema = Yup.object({});
+const validationSchema = Yup.object({
+  date: Yup.string().required("Required"),
+  task: Yup.string().required("Required"),
+  project: Yup.string().required("Required"),
+  estimationHr: Yup.number().required("Required"),
+  completedHr: Yup.number().required("Required"),
+});
 
 interface FormValues {
   date: string;
@@ -38,6 +48,41 @@ const initialValues: FormValues = {
 };
 
 export default function TimeSheet() {
+  const userData = useSession();
+  const toast = useToast();
+  const { data: timesheetData } = useSWR(
+    `/api/timesheet?id=${userData?.data?.user.id}`
+  );
+
+  const { data: projects } = useSWR(`/api/getOptions?type=projects`);
+
+  const submitTaskHandler = async (values: FormValues) => {
+    const taskData = {
+      taskName: values.task,
+      estimation: values.estimationHr,
+      completed: values.completedHr,
+      employee: userData?.data?.user.id,
+      project: Number(values.project),
+      date: values.date,
+    };
+    const response = await ky.post(`/api/timesheet/submitTask`, {
+      json: taskData,
+    });
+    if (response) {
+      toast({
+        title: "Task added successfully",
+        status: "success",
+        isClosable: true,
+      });
+    } else {
+      toast({
+        title: "Something went wrong",
+        status: "error",
+        isClosable: true,
+      });
+    }
+  };
+
   return (
     <VStack w="100%" p={6}>
       <HStack
@@ -55,6 +100,7 @@ export default function TimeSheet() {
             values: FormValues,
             { setSubmitting }: FormikHelpers<FormValues>
           ) => {
+            submitTaskHandler(values);
             setSubmitting(false);
           }}
         >
@@ -140,9 +186,16 @@ export default function TimeSheet() {
                             id="project"
                             placeholder="Select option"
                           >
-                            <option value="option1">CRR</option>
-                            <option value="option2">Option 2</option>
-                            <option value="option3">Option 3</option>
+                            {projects?.map(
+                              (
+                                project: { id: number; projectName: string },
+                                i: number
+                              ) => (
+                                <option value={project?.id} key={i}>
+                                  {project?.projectName}
+                                </option>
+                              )
+                            )}
                           </Select>
                           <FormErrorMessage>
                             {typeof form.errors.project === "string" &&
@@ -172,7 +225,7 @@ export default function TimeSheet() {
                               {...field}
                               id="estimationHr"
                               placeholder=""
-                              type="text"
+                              type="number"
                             />
                             <FormErrorMessage>
                               {typeof form.errors.estimationHr === "string" &&
@@ -201,7 +254,7 @@ export default function TimeSheet() {
                               {...field}
                               id="completedHr"
                               placeholder=""
-                              type="text"
+                              type="number"
                             />
                             <FormErrorMessage>
                               {typeof form.errors.completedHr === "string" &&
@@ -231,7 +284,87 @@ export default function TimeSheet() {
         </Formik>
       </HStack>
       <Box w="100%" mt={10}>
-        <Table tableGridSize={16} isHeader={true} />
+        {timesheetData && (
+          <Table
+            tableGridSize={16}
+            isHeader={true}
+            tableHeader={[
+              {
+                label: "Date",
+                colspan: 2,
+              },
+              {
+                label: "Task",
+                colspan: 5,
+              },
+              {
+                label: "Project",
+                colspan: 3,
+              },
+              {
+                label: "Estimated",
+                colspan: 2,
+              },
+              {
+                label: "Completed",
+                colspan: 2,
+              },
+              {
+                label: "Remaining",
+                colspan: 2,
+              },
+            ]}
+            tableBodyData={timesheetData?.map(
+              (
+                item: {
+                  taskName: string;
+                  estimation: number;
+                  completed: number;
+                },
+                i: number
+              ) => {
+                return [
+                  {
+                    value: item?.taskName,
+                    colspan: 2,
+                    style: {},
+                    labelColor: "string",
+                  },
+                  {
+                    value: item?.taskName,
+                    colspan: 5,
+                    style: {},
+                    labelColor: "string",
+                  },
+                  {
+                    value: item?.taskName,
+                    colspan: 3,
+                    style: {},
+                    labelColor: "string",
+                  },
+                  {
+                    value: item?.estimation,
+                    colspan: 2,
+                    style: {},
+                    labelColor: "string",
+                  },
+                  {
+                    value: item?.completed,
+                    colspan: 2,
+                    style: {},
+                    labelColor: "string",
+                  },
+                  {
+                    value: item?.estimation,
+                    colspan: 2,
+                    style: {},
+                    labelColor: "string",
+                  },
+                ];
+              }
+            )}
+          />
+        )}
       </Box>
     </VStack>
   );
