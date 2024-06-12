@@ -145,3 +145,17 @@ a {
 .rbc-event{
   background-color: #FFE5E5 !important;
 }
+
+.rbc-month-header{
+height: 50px;
+}
+.rbc-header{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+}
+.rbc-date-cell{
+  text-align: center;
+}
