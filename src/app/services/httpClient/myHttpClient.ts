@@ -4,10 +4,11 @@ import { NextRequest, NextResponse } from "next/server";
 import { Login } from "../auth";
 import { ApiHandler, MyClientOptions } from "../types";
 import { IncomingMessage, ServerResponse } from "http";
-import { GetData, PostTaskData, GetOptions } from "../";
+import { GetData, PostTaskData, GetOptions, GetDashboardCount } from "../";
 
 export class MyHTTPClient {
   public auth;
+  public dashboard;
   public timesheet;
 
   constructor(
@@ -64,6 +65,9 @@ export class MyHTTPClient {
 
     this.auth = {
       login: withApiClient(Login),
+    };
+    this.dashboard = {
+      GetDashboardCount: withApiClient(GetDashboardCount),
     };
     this.timesheet = {
       GetData: withApiClient(GetData),

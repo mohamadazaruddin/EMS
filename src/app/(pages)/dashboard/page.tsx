@@ -1,3 +1,4 @@
+"use client";
 import { Box, VStack, Text, Grid, GridItem } from "@chakra-ui/react";
 import React from "react";
 import { CardWithCount } from "../../components";
@@ -7,27 +8,32 @@ import {
   NavCompany,
 } from "../../components/Icons";
 import EventCalender from "@/app/components/Calender/EventCalender";
+import useSWR from "swr";
+import { useSession } from "next-auth/react";
 
 export default function Dashboard() {
+  const { data: counts } = useSWR(`/api/getDashboardData`);
+  const userData = useSession();
+
   const countData = [
     {
       icon: <TotalEmpIcon h="24px" w="24px" />,
-      count: "45",
+      count: counts?.totalEmp,
       label: "Total Employees",
     },
     {
       icon: <DepartmentIcon h="24px" w="24px" />,
-      count: "4",
+      count: counts?.totalDepartment,
       label: "Total Departments",
     },
     {
       icon: <NavCompany h="24px" w="24px" />,
-      count: "5",
+      count: counts?.totalTeam,
       label: "Total Teams",
     },
     {
       icon: <NavCompany h="24px" w="24px" />,
-      count: "45",
+      count: counts?.totalProject,
       label: "Total Projects",
     },
   ];
@@ -42,7 +48,7 @@ export default function Dashboard() {
           mb={1}
           fontWeight="medium"
         >
-          Welcome, Azar
+          Welcome, {userData.data?.user?.name}
         </Text>
         <Text color="#555D7B" fontSize="sm" m="0">
           we are happy to help your organization needs!
