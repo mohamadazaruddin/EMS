@@ -33,7 +33,7 @@ const Sidebar = () => {
           h="18px"
           w="18px"
           mr="8px"
-          color={pathname === "/dashboard" ? "#fff" : "#2C365C"}
+          color={pathname.includes("dashboard") ? "#fff" : "#2C365C"}
         />
       ),
       href: "/dashboard",
@@ -45,10 +45,10 @@ const Sidebar = () => {
           h="18px"
           w="18px"
           mr="8px"
-          color={pathname === "Company" ? "#fff" : "#2C365C"}
+          color={pathname.includes("company") ? "#fff" : "#2C365C"}
         />
       ),
-      href: "/company",
+      href: "/company/teams",
       options: [
         {
           label: "Teams",
@@ -84,7 +84,7 @@ const Sidebar = () => {
               color={pathname === "/dashboard" ? "#fff" : "#2C365C"}
             />
           ),
-          href: "/company/organization",
+          href: "/company/org",
         },
       ],
     },
@@ -157,12 +157,12 @@ const Sidebar = () => {
             <>
               <Link
                 href={item.href}
-                bg={pathname === item.href ? "#3BCBBE" : "#fff"}
+                bg={pathname.includes(item.href) ? "#3BCBBE" : "#fff"}
                 _hover={{
-                  bg: pathname === item.href ? "#3BCBBE" : "primary.100",
+                  bg: pathname.includes(item.href) ? "#3BCBBE" : "primary.100",
                 }}
                 color={
-                  pathname === item.href
+                  pathname.includes(item.href)
                     ? "#fff"
                     : item.label === "Logout"
                     ? "#FF3535"
@@ -181,58 +181,59 @@ const Sidebar = () => {
                   <Text> {item.label}</Text>
                 </Flex>
               </Link>
-              {pathname === "/company" && item.href === "/company" && (
-                <HStack gap={0}>
-                  <Divider
-                    orientation="vertical"
-                    color="#80869D"
-                    borderColor="#80869D"
-                    h="133px"
-                    ms={4}
-                  />
-                  <VStack gap={0} alignItems="flex-start" w="full">
-                    {item.options?.map((item, i) => {
-                      return (
-                        <HStack key={i} w="full">
-                          <Divider
-                            orientation="horizontal"
-                            color="#80869D"
-                            borderColor="#80869D"
-                            w="10px"
-                          />
-                          <Link
-                            href={item.href}
-                            bg={
-                              item.href === "/company/teams"
-                                ? "#F7F8FA"
-                                : "#fff"
-                            }
-                            color={
-                              pathname === item.href
-                                ? "#fff"
-                                : item.label === "Logout"
-                                ? "#FF3535"
-                                : "#2C365C"
-                            }
-                            w="100%"
-                            px="4"
-                            py="3"
-                            borderRadius="8px"
-                            key={i}
-                            fontSize="sm"
-                            fontWeight="medium"
-                          >
-                            <Flex>
-                              {item.icon}
-                              <Text> {item.label}</Text>
-                            </Flex>
-                          </Link>
-                        </HStack>
-                      );
-                    })}
-                  </VStack>
-                </HStack>
-              )}
+              {pathname.includes("company") &&
+                item.href.includes("/company") && (
+                  <HStack gap={0}>
+                    <Divider
+                      orientation="vertical"
+                      color="#80869D"
+                      borderColor="#80869D"
+                      h="133px"
+                      ms={4}
+                    />
+                    <VStack gap={0} alignItems="flex-start" w="full">
+                      {item.options?.map((item, i) => {
+                        return (
+                          <HStack key={i} w="full">
+                            <Divider
+                              orientation="horizontal"
+                              color="#80869D"
+                              borderColor="#80869D"
+                              w="10px"
+                            />
+                            <Link
+                              href={item.href}
+                              bg={
+                                item.href.includes(pathname)
+                                  ? "#F7F8FA"
+                                  : "#fff"
+                              }
+                              color={
+                                item.href.includes(pathname)
+                                  ? "#2C365C"
+                                  : item.label === "Logout"
+                                  ? "#FF3535"
+                                  : "#2C365C"
+                              }
+                              w="100%"
+                              px="4"
+                              py="3"
+                              borderRadius="8px"
+                              key={i}
+                              fontSize="sm"
+                              fontWeight="medium"
+                            >
+                              <Flex>
+                                {item.icon}
+                                <Text> {item.label}</Text>
+                              </Flex>
+                            </Link>
+                          </HStack>
+                        );
+                      })}
+                    </VStack>
+                  </HStack>
+                )}
             </>
           );
         })}

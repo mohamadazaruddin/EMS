@@ -5,10 +5,14 @@ import { Login } from "../auth";
 import { ApiHandler, MyClientOptions } from "../types";
 import { IncomingMessage, ServerResponse } from "http";
 import { GetData, PostTaskData, GetOptions, GetDashboardCount } from "../";
+import { GetTeams } from "../employees/getTeams";
+import { GetEmployeesData } from "../employees/getEmployeesData";
+import { GetRole } from "../employees/getRoles";
 
 export class MyHTTPClient {
   public auth;
   public dashboard;
+  public employees;
   public timesheet;
 
   constructor(
@@ -73,6 +77,11 @@ export class MyHTTPClient {
       GetData: withApiClient(GetData),
       PostTaskData: withApiClient(PostTaskData),
       GetOptions: withApiClient(GetOptions),
+    };
+    this.employees = {
+      GetTeams: withApiClient(GetTeams),
+      Roles: withApiClient(GetRole),
+      EmpData: withApiClient(GetEmployeesData),
     };
   }
 }
