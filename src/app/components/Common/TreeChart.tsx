@@ -60,13 +60,13 @@ const TreeChart = (props: any) => {
             return `
 <div class="card">
         <div class="profile-img">
-            <image src="${d?.data?.profileImage}" />
+            <image src="${"/images/peoples/adam.svg"}" />
         </div>
         <div class="info">
             <p class="emp-name">${
               d?.data?.firstname + " " + d?.data?.lastname
             }</p>
-            <p class="emp-role">${d?.data?.role.roleName}</p>
+            <p class="emp-role">${d?.data?.role}</p>
         </div>
     </div>
 `;
