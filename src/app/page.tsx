@@ -46,7 +46,7 @@ export default function Home() {
   });
   const { onClose: closeLoginModal } = useDisclosure();
   const { push } = useRouter();
-  const { data } = useSWRImmutable("https://ems-be-xxuk.onrender.com");
+  const { data } = useSWRImmutable(process.env.NEXT_BASE_URL);
 
   const userData = useSession();
   const toast = useToast();
