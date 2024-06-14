@@ -38,9 +38,15 @@ export default function Documents() {
       <Grid templateColumns="repeat(5, 1fr)" mt={10}>
         {documentData.map((document, i) => {
           return (
-            <GridItem colSpan={1} bg="#fff" p={4} borderRadius="8px" mr={10}>
+            <GridItem
+              colSpan={1}
+              bg="#fff"
+              p={4}
+              borderRadius="8px"
+              mr={10}
+              key={i}
+            >
               <DocumentCard
-                key={i}
                 bg="#fff"
                 p={4}
                 borderRadius="8px"
