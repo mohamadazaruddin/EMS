@@ -1,9 +1,6 @@
 import React from "react";
 import {
   Box,
-  Grid,
-  GridItem,
-  HStack,
   VStack,
   Text,
   Flex,
@@ -12,10 +9,23 @@ import {
   MenuList,
   Menu,
   MenuItem,
+  BoxProps,
 } from "@chakra-ui/react";
-import { XlsxIcon, MenuIcon, Download, Delete } from "@/app/components/Icons";
+import { PDFIcon, MenuIcon, Download } from "@/app/components/Icons";
 
-export default function DocumentCard({ ...rest }) {
+interface DocumentData extends BoxProps {
+  name: string;
+  size: string;
+  url: string;
+  updated: string;
+}
+
+export default function DocumentCard({
+  documentData,
+  ...rest
+}: {
+  documentData: DocumentData;
+} & BoxProps) {
   return (
     <Box {...rest} w="100%">
       <Box textAlign="end">
@@ -27,17 +37,25 @@ export default function DocumentCard({ ...rest }) {
             variant="outline"
           />
           <MenuList>
-            <MenuItem icon={<Download h="14px" w="14px" />}>Download</MenuItem>
-            <MenuItem icon={<Delete h="14px" w="14px" />}>Delete</MenuItem>
+            <a
+              href={documentData.url}
+              download={documentData.name}
+              style={{ color: "unset", textDecoration: "none" }}
+            >
+              <MenuItem icon={<Download h="14px" w="14px" />}>
+                Download
+              </MenuItem>
+            </a>
+            {/* <MenuItem icon={<Delete h="14px" w="14px" />}>Delete</MenuItem> */}
           </MenuList>
         </Menu>
       </Box>
       <VStack>
         <Box>
-          <XlsxIcon h="80px" w="80px" />
+          <PDFIcon h="80px" w="80px" />
         </Box>
         <Text mt={4} pb={5} color="#091641" fontSize={"md"} fontWeight="medium">
-          HR_Policies.pdf
+          {documentData.name}
         </Text>
         <Flex justifyContent="space-between" mb={4} w="100%">
           <Box mr={4}>
@@ -45,7 +63,7 @@ export default function DocumentCard({ ...rest }) {
               File Size :
             </Text>
             <Text color="#2C365C" fontSize={"xs"} fontWeight="medium">
-              2.5 mb
+              {documentData.size}
             </Text>
           </Box>
           <Box>
@@ -53,7 +71,7 @@ export default function DocumentCard({ ...rest }) {
               Uploaded on :
             </Text>
             <Text color="#2C365C" fontSize={"xs"} fontWeight="medium">
-              04/05/2023
+              {documentData.updated}
             </Text>
           </Box>
         </Flex>

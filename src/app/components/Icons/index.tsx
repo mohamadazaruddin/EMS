@@ -11,6 +11,7 @@ export { default as SearchIcon } from "./SearchIcon";
 export { default as CalenderIcon } from "./CalenderIcon";
 export { default as MenuIcon } from "./MenuIcon";
 export { default as XlsxIcon } from "./XlsxIcon";
+export { default as PDFIcon } from "./PDFIcon";
 export { default as Delete } from "./Delete";
 export { default as Download } from "./Download";
 export { default as NavTeams } from "./NavTeams";
