@@ -353,7 +353,7 @@ export default function TimeSheet() {
               ]}
               tableBodyData={timesheetData.map((item) => [
                 {
-                  value: item.taskName,
+                  value: formatDate(item.date),
                   colspan: 2,
                   style: {},
                   labelColor: "string",
