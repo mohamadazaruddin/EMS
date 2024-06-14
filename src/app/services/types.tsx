@@ -57,3 +57,12 @@ export type postTaskPayload = {
   project: number;
   date: string;
 };
+
+export type timesheetData = {
+  id: number;
+  uuid: null;
+  taskName: string;
+  estimation: number;
+  date: string;
+  completed: number;
+}[];
