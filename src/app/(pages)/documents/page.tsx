@@ -28,13 +28,13 @@ export default function Documents() {
   ];
   return (
     <VStack w="100%" p={6} alignItems={"flex-start"}>
-      <HStack
+      {/* <HStack
         bg="#fff"
         p={6}
         w="100%"
         justifyContent="space-between"
         borderRadius="8px"
-      ></HStack>
+      ></HStack> */}
       <Grid templateColumns="repeat(5, 1fr)" mt={10}>
         {documentData.map((document, i) => {
           return (
