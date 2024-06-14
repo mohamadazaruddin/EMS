@@ -1,9 +1,6 @@
 import React from "react";
 import {
   Box,
-  Grid,
-  GridItem,
-  HStack,
   VStack,
   Text,
   Flex,
@@ -12,20 +9,23 @@ import {
   MenuList,
   Menu,
   MenuItem,
+  BoxProps,
 } from "@chakra-ui/react";
-import { PDFIcon, MenuIcon, Download, Delete } from "@/app/components/Icons";
+import { PDFIcon, MenuIcon, Download } from "@/app/components/Icons";
+
+interface DocumentData extends BoxProps {
+  name: string;
+  size: string;
+  url: string;
+  updated: string;
+}
 
 export default function DocumentCard({
   documentData,
   ...rest
 }: {
-  documentData: {
-    name: string;
-    size: string;
-    url: string;
-    updated: string;
-  };
-}) {
+  documentData: DocumentData;
+} & BoxProps) {
   return (
     <Box {...rest} w="100%">
       <Box textAlign="end">
