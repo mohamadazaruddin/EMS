@@ -15,7 +15,7 @@ export default function CustomLayout({
     <Box bg="#F7F8FA" h="100vh" overflowY="auto" w="100%">
       <HStack>
         <Sidebar />
-        <Box ms="250px" w="100%" p="6">
+        <Box ms="250px" w="100%" p="6" h="100%">
           {!pathname.toLowerCase().includes("edit") && <GlobalHeader />}
           {children}
         </Box>

@@ -7,3 +7,5 @@ export { default as LoginMessage } from "./Common/LoginMessage";
 export { default as DocumentCard } from "./Card/DocumentCard";
 export { default as Download } from "./Icons/Download";
 export { default as GlobalHeader } from "./Common/GlobalHeader";
+export { default as PageLayout } from "./Common/PageLayout";
+export { default as Skelton } from "./Common/Skelton";

@@ -1,113 +1,68 @@
-import { Box, Grid, GridItem, HStack, VStack } from "@chakra-ui/react";
+import { Grid, GridItem, VStack } from "@chakra-ui/react";
 import React from "react";
 
-type DesktopTable = {
-  tableHeader?: TableHeaderType[];
-  tableBodyData?: [
-    {
-      value: string;
-      colspan?: number;
-      style: {};
-      labelColor?: string;
-    }
-  ];
+type TableProps = {
+  tableHeader?: { label: string; colspan?: number }[];
+  tableBodyData?: { value: string | number; colspan?: number }[][];
   tableGridSize: number;
   isHeader?: boolean;
 };
 
-type bodyType = {
-  id: number;
-  date: string;
-  task: string;
-  project: string;
-  estimation: number;
-  completed: number;
-  remaining: number;
-};
-
-type TableHeaderType = {
-  headerSize?: number;
-  label: string;
-  colspan?: number;
-  style?: {};
-};
-
-export default function Table({
+const Table: React.FC<TableProps> = ({
   tableHeader,
   tableBodyData,
   tableGridSize,
   isHeader,
-}: DesktopTable) {
-  return (
-    <VStack w="100%">
-      {isHeader && (
-        <Grid
-          templateColumns={`repeat(${tableGridSize ? tableGridSize : 16}, 1fr)`}
-          w="100%"
-          p={6}
-          bg="#fff"
-          borderRadius="8px"
-        >
-          {tableHeader?.map((header, i) => {
-            return (
-              <GridItem colSpan={header.colspan ? header.colspan : 2} key={i}>
-                {header.label}
-              </GridItem>
-            );
-          })}
-          {/* <GridItem colSpan={2}>Date</GridItem>
-          <GridItem colSpan={5}>Task</GridItem>
-          <GridItem colSpan={3}>Project</GridItem>
-          <GridItem colSpan={2}>Estimated</GridItem>
-          <GridItem colSpan={2}>Completed</GridItem>
-          <GridItem colSpan={2}>Remaining</GridItem> */}
-        </Grid>
-      )}
-
+}) => (
+  <VStack w="100%" align="stretch">
+    {isHeader && (
       <Grid
-        templateColumns="repeat(16, 1fr)"
+        templateColumns={`repeat(${tableGridSize}, 1fr)`}
+        gap={2}
         w="100%"
-        py={3}
-        px={6}
+        p={4}
         bg="#fff"
         borderRadius="8px"
       >
-        {tableBodyData?.map((subArray: any) =>
-          subArray?.map(
-            (
-              data: {
-                value: string;
-                colspan?: number;
-                style: {};
-                labelColor?: string;
-              },
-              i: number
-            ) => {
-              return (
-                <GridItem key={i} colSpan={data.colspan ? data.colspan : 2}>
-                  {data.value}
-                </GridItem>
-              );
-            }
-          )
-        )}
-        {/* {tableBodyData?.map((data) => {
-          return (
-            <GridItem colSpan={data.colspan ? data.colspan : 2}>
-              {console.log(data, "data")}
-              {data.value}
-            </GridItem>
-          );
-        })} */}
-        {/* <GridItem colSpan={2}>16 Oct 2023</GridItem>
-        <GridItem colSpan={5}>
-          ui development of header and journey component....
-        </GridItem>
-        <GridItem colSpan={3}>Arya Exports</GridItem>
-        <GridItem colSpan={2}>9</GridItem>
-        <GridItem colSpan={2}>6</GridItem>
-        <GridItem colSpan={2}>3</GridItem> */}
+        {tableHeader?.map((header, index) => (
+          <GridItem
+            key={index}
+            colSpan={header.colspan || 1}
+            color="#17234D"
+            fontWeight="bold"
+            fontSize="18px"
+          >
+            {header.label}
+          </GridItem>
+        ))}
       </Grid>
-    </VStack>
-  );
-}
+    )}
+
+    {tableBodyData?.map((row, rowIndex) => (
+      <Grid
+        key={rowIndex}
+        templateColumns={`repeat(${tableGridSize ? tableGridSize : 16}, 1fr)`}
+        gap={2}
+        w="100%"
+        p={4}
+        bg="#fff"
+        _even={{ background: "#F8FAFB" }}
+        borderRadius="8px"
+        border="1px solid #0000001A"
+      >
+        {row.map((cell, cellIndex) => (
+          <GridItem
+            key={cellIndex}
+            colSpan={cell.colspan || 1}
+            fontWeight="500"
+            fontSize="16px"
+          >
+            {cell.value}
+          </GridItem>
+        ))}
+      </Grid>
+    ))}
+  </VStack>
+);
+
+export default Table;

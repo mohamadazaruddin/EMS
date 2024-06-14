@@ -17,3 +17,4 @@ export { default as Download } from "./Download";
 export { default as NavTeams } from "./NavTeams";
 export { default as NavChapters } from "./NavChapters";
 export { default as NavOrganization } from "./NavOrganization";
+export { default as Loader } from "./Loader";
