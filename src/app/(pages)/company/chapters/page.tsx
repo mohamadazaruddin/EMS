@@ -7,7 +7,7 @@ interface RoleType {
   roleName: string;
   id: number;
 }
-export default function chapters() {
+export default function Chapters() {
   const { data: roleData } = useSWR<RoleType[]>(`/api/getRoles`);
   const [roleId, setRoleId] = useState((roleData && roleData[0].id) || 0);
   const { data: empData } = useSWR(
