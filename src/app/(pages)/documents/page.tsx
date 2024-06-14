@@ -40,6 +40,7 @@ export default function Documents() {
           return (
             <GridItem colSpan={1} bg="#fff" p={4} borderRadius="8px" mr={10}>
               <DocumentCard
+                key={i}
                 bg="#fff"
                 p={4}
                 borderRadius="8px"
