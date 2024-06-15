@@ -8,12 +8,14 @@ import { GetData, PostTaskData, GetOptions, GetDashboardCount } from "../";
 import { GetTeams } from "../employees/getTeams";
 import { GetEmployeesData } from "../employees/getEmployeesData";
 import { GetRole } from "../employees/getRoles";
+import { PostProfileData, GetProfileData } from "../index";
 
 export class MyHTTPClient {
   public auth;
   public dashboard;
   public employees;
   public timesheet;
+  public profile;
 
   constructor(
     req?: NextRequest | IncomingMessage,
@@ -82,6 +84,10 @@ export class MyHTTPClient {
       GetTeams: withApiClient(GetTeams),
       Roles: withApiClient(GetRole),
       EmpData: withApiClient(GetEmployeesData),
+    };
+    this.profile = {
+      PostProfileData: withApiClient(PostProfileData),
+      GetProfileData: withApiClient(GetProfileData),
     };
   }
 }

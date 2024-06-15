@@ -48,7 +48,6 @@ export type EventItem = {
   isResizable?: boolean;
   resourceId?: number;
 };
-
 export type postTaskPayload = {
   taskName: string;
   estimation: number;
@@ -56,6 +55,15 @@ export type postTaskPayload = {
   employee: number;
   project: number;
   date: string;
+};
+
+export type editProfile = {
+  firstName: string;
+  lastName: string;
+  role: number;
+  team: number;
+  email: string;
+  contact: string;
 };
 
 export type timesheetData = {
