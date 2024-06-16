@@ -8,7 +8,7 @@ import { GetData, PostTaskData, GetOptions, GetDashboardCount } from "../";
 import { GetTeams } from "../employees/getTeams";
 import { GetEmployeesData } from "../employees/getEmployeesData";
 import { GetRole } from "../employees/getRoles";
-import { PostProfileData, GetProfileData } from "../index";
+import { PostProfileData, GetProfileData, Logout } from "../index";
 
 export class MyHTTPClient {
   public auth;
@@ -71,6 +71,7 @@ export class MyHTTPClient {
 
     this.auth = {
       login: withApiClient(Login),
+      logout: withApiClient(Logout),
     };
     this.dashboard = {
       GetDashboardCount: withApiClient(GetDashboardCount),
