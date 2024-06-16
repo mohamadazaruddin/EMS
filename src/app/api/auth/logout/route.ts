@@ -6,7 +6,5 @@ export async function POST(req: NextRequest, res: NextResponse) {
   const httpClient = new MyHTTPClient(req, res);
   const data = await httpClient.auth.logout();
 
-  console.log(data, "datae");
-
   return Response.json(data);
 }
