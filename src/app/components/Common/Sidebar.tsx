@@ -7,6 +7,7 @@ import {
   Flex,
   Divider,
   HStack,
+  useToast,
 } from "@chakra-ui/react";
 import Logo from "../Icons/Logo";
 import {
@@ -21,10 +22,15 @@ import {
   NavOrganization,
 } from "../Icons";
 import { useState } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import ModelBox from "../Model";
+import ky from "ky";
 
 const Sidebar = () => {
+  const { push } = useRouter();
+  const toast = useToast();
   const pathname = usePathname();
+  const [isLogout, setIsLogout] = useState(false);
   const siderBarItem = [
     {
       label: "Dashboard",
@@ -134,9 +140,25 @@ const Sidebar = () => {
           color={pathname === "/logout" ? "#fff" : "#FF3535"}
         />
       ),
-      href: "/logout",
+      onClick: () => setIsLogout(true),
     },
   ];
+
+  const handleLogout = async () => {
+    try {
+      const response = ky.post(`/api/auth/logout`);
+      if (await response) {
+        push("/");
+      }
+    } catch (error) {
+      toast({
+        title: "Something went wrong",
+        status: "error",
+        isClosable: true,
+      });
+    }
+  };
+
   return (
     <Box
       pos="fixed"
@@ -157,12 +179,19 @@ const Sidebar = () => {
             <>
               <Link
                 href={item.href}
-                bg={pathname.includes(item.href) ? "#3BCBBE" : "#fff"}
+                bg={
+                  item?.href && pathname.includes(item?.href)
+                    ? "#3BCBBE"
+                    : "#fff"
+                }
                 _hover={{
-                  bg: pathname.includes(item.href) ? "#3BCBBE" : "primary.100",
+                  bg:
+                    item?.href && pathname.includes(item?.href)
+                      ? "#3BCBBE"
+                      : "primary.100",
                 }}
                 color={
-                  pathname.includes(item.href)
+                  item?.href && pathname.includes(item?.href)
                     ? "#fff"
                     : item.label === "Logout"
                     ? "#FF3535"
@@ -175,6 +204,7 @@ const Sidebar = () => {
                 key={i}
                 fontSize="sm"
                 fontWeight="medium"
+                onClick={item.label === "Logout" ? item.onClick : undefined} // Attach onClick for Logout
               >
                 <Flex>
                   {item.icon}
@@ -182,7 +212,7 @@ const Sidebar = () => {
                 </Flex>
               </Link>
               {pathname.includes("company") &&
-                item.href.includes("/company") && (
+                item.href?.includes("/company") && (
                   <HStack gap={0}>
                     <Divider
                       orientation="vertical"
@@ -238,6 +268,19 @@ const Sidebar = () => {
           );
         })}
       </VStack>
+
+      {isLogout && (
+        <ModelBox
+          isOpen={isLogout}
+          close={() => {
+            setIsLogout(false);
+          }}
+          header={"Confirm Logout"}
+          content={"Are you sure you want to log out?"}
+          primaryBtnText={"Logout"}
+          primaryBtnClick={handleLogout}
+        />
+      )}
     </Box>
   );
 };
