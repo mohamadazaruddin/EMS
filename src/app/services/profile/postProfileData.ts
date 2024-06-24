@@ -1,23 +1,15 @@
 import ky from "ky";
 
-import { editProfile } from "../../services/types";
+import { UserData } from "../../services/types";
 
 export const PostProfileData = async (
   httpClient: typeof ky,
-  params: { data: editProfile }
+  params: { data: UserData; id: number }
 ) => {
-  // const response = await httpClient
-  //   .post(`timesheet`, {
-  //     json: params.data,
-  //   })
-  //   .json();
-  //   return response;
-  return {
-    firstName: "Nishi",
-    lastName: "Gawas",
-    role: 1,
-    team: 2,
-    email: "gawas@g.com",
-    contact: "8108307952",
-  };
+  const response = await httpClient
+    .put(`employees/${params.id}`, {
+      json: params.data,
+    })
+    .json();
+  return response;
 };

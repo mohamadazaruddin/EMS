@@ -25,12 +25,12 @@ import { PageLayout } from "@/app/components";
 import useSWR from "swr";
 
 const validationSchema = Yup.object({
-  firstName: Yup.string().required("Required"),
-  lastName: Yup.string().required("Required"),
-  role: Yup.string().required("Required"),
-  team: Yup.string().required("Required"),
-  email: Yup.string().email("Invalid email address").required("Required"),
-  contact: Yup.string().required("Required"),
+  // firstName: Yup.string().required("Required"),
+  // lastName: Yup.string().required("Required"),
+  // role: Yup.string().required("Required"),
+  // team: Yup.string().required("Required"),
+  // email: Yup.string().email("Invalid email address").required("Required"),
+  // contact: Yup.string().required("Required"),
 });
 
 interface FormValues {
@@ -51,25 +51,43 @@ export default function EditProfile() {
   const { data: teams } = useSWR(`/api/getOptions?type=teams`);
 
   const initialValues: FormValues = {
-    firstName: profileData?.firstName || "",
-    lastName: profileData?.lastName || "",
-    role: profileData?.role || 0,
-    team: profileData?.team || 0,
-    email: profileData?.email || "",
-    contact: profileData?.contact || "",
+    firstName: profileData ? profileData[0]?.firstname : "",
+    lastName: profileData ? profileData[0]?.lastname : "",
+    role: profileData ? profileData[0]?.role?.id : 0,
+    team: profileData ? profileData[0]?.team?.id : 0,
+    email: profileData ? profileData[0]?.email : "",
+    contact: profileData ? profileData[0]?.contact_no : "",
   };
 
   const editProfileData = async (values: FormValues) => {
+    console.log(profileData, "values");
     const response = await ky
-      .post("/api/postProfiledata", { json: values })
+      .post(`/api/postProfiledata?id=${userData?.data?.user.id}`, {
+        json: {
+          id: profileData && profileData[0].id,
+          uuid: profileData && profileData[0].uuid,
+          email: values.email,
+          password: profileData && profileData[0].password,
+          firstname: values.firstName,
+          lastname: values.lastName,
+          profileImage: profileData && profileData[0].profileImage,
+          isTeamLead: profileData && profileData[0].isTeamLead,
+          isChapterLead: profileData && profileData[0].isChapterLead,
+          token: profileData && profileData[0].token,
+          role: values.role,
+          team: values.team,
+          project: profileData && profileData[0].project,
+          contact_no: values.contact,
+        },
+      })
       .json();
     if (response) {
-      getProfileData();
       toast({
         title: "Edit profile successfully",
         status: "success",
         isClosable: true,
       });
+      getProfileData();
     } else {
       toast({
         title: "Something went wrong",
@@ -81,11 +99,13 @@ export default function EditProfile() {
 
   useEffect(() => {
     getProfileData();
-  }, []);
+  }, [userData?.data?.user.id]);
 
   const getProfileData = async () => {
     setIsLoading(true);
-    const response = await ky.get(`/api/getProfileData`).json<editProfile>();
+    const response = await ky
+      .get(`/api/getProfileData?id=${userData?.data?.user.id}`)
+      .json<editProfile>();
     if (response) {
       setProfileData(response);
       setIsLoading(false);
@@ -97,8 +117,13 @@ export default function EditProfile() {
       <VStack bg="#fff" p={6} m={5} h="max-content">
         <VStack w="100%">
           <VStack w="50%" mb={10}>
-            <Image src="./Images/profile.png" borderRadius="50%" />
-            <Button
+            <Image
+              src={
+                profileData && profileData[0] ? profileData[0].profileImage : ""
+              }
+              borderRadius="50%"
+            />
+            {/* <Button
               mt={5}
               type="submit"
               bg="#17234D"
@@ -107,7 +132,7 @@ export default function EditProfile() {
               w="40%"
             >
               Upload a photo
-            </Button>
+            </Button> */}
           </VStack>
           <Box w="100%">
             <Formik

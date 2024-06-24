@@ -57,14 +57,60 @@ export type postTaskPayload = {
   date: string;
 };
 
-export type editProfile = {
-  firstName: string;
-  lastName: string;
+// export type editProfile = {
+//   firstname: string;
+//   lastname: string;
+//   role: number;
+//   team: number;
+//   email: string;
+//   contact: string;
+// }[];
+
+export type UserData = {
+  id: number;
+  uuid: string | null;
+  email: string;
+  password: string;
+  firstname: string;
+  lastname: string;
+  profileImage: string;
+  isTeamLead: boolean;
+  isChapterLead: boolean;
+  token: string;
   role: number;
   team: number;
-  email: string;
-  contact: string;
+  project: number;
+  contact_no: string;
 };
+
+export type editProfile = {
+  id: number;
+  uuid: string | null;
+  email: string;
+  password: string;
+  firstname: string;
+  lastname: string;
+  profileImage: string;
+  isTeamLead: boolean;
+  isChapterLead: boolean;
+  token: string | null;
+  contact_no: string;
+  role: {
+    id: number;
+    uuid: string | null;
+    roleName: string;
+  };
+  team: {
+    id: number;
+    uuid: string | null;
+    teamName: string;
+  };
+  project: {
+    id: number;
+    uuid: string | null;
+    projectName: string;
+  };
+}[];
 
 export type timesheetData = {
   id: number;

@@ -31,25 +31,25 @@ export default function LoginMessage({
 }: LoginModalProps) {
   const credentialInfo = [
     {
-      image: "/images/peoples/jacob.svg",
+      image: "/Images/peoples/jacob.svg",
       name: "Jacob",
       email: "jacob@abc.com",
       password: "jacob@123",
     },
     {
-      image: "/images/peoples/sara.svg",
+      image: "/Images/peoples/sara.svg",
       name: "Sara",
       email: "sara@abc.com",
       password: "sara@123",
     },
     {
-      image: "/images/peoples/Adam.svg",
+      image: "/Images/peoples/Adam.svg",
       name: "Adam",
       email: "adam@abc.com",
       password: "adam@123",
     },
     {
-      image: "/images/peoples/linda.svg",
+      image: "/Images/peoples/linda.svg",
       name: "Linda",
       email: "linda@abc.com",
       password: "linda@123",
