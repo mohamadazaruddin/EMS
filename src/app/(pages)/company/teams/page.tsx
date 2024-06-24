@@ -41,33 +41,29 @@ export default function Company() {
     <VStack w="100%">
       <Box
         bg="#fff"
-        px={4}
         w="100%"
         mt="3"
         border="1px solid #0000001A"
         borderRadius="6px"
       >
         {teamData && (
-          <Grid templateColumns="repeat(4, 1fr)" gap={6}>
+          <Grid templateColumns="repeat(4, 1fr)" gap={6} p={2}>
             {teamData?.map((item, i) => (
               <Flex
                 py="2"
                 key={i}
                 justifyContent="center"
                 alignItems="center"
-                bg={item.id === teamId ? "#3BCBBE" : "#fff"}
+                color={item.id === teamId ? "#17234D" : "#555D7B"}
                 onClick={() => setTeamId(item.id)}
                 cursor="pointer"
+                fontWeight={item.id === teamId ? "bold" : "normal"}
                 borderRight={
                   i !== teamData?.length - 1 ? "2px solid #28D999" : "none"
                 }
+                textTransform="capitalize"
               >
-                <GridItem
-                  textAlign="center"
-                  fontSize="sm"
-                  fontWeight="medium"
-                  color={item.id === teamId ? "#fff" : "#2C365C"}
-                >
+                <GridItem textAlign="center" fontSize="sm">
                   {item.teamName}
                 </GridItem>
               </Flex>

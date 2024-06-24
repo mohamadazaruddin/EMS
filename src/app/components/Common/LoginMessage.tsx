@@ -43,7 +43,7 @@ export default function LoginMessage({
       password: "sara@123",
     },
     {
-      image: "/Images/peoples/Adam.svg",
+      image: "/Images/peoples/adam.svg",
       name: "Adam",
       email: "adam@abc.com",
       password: "adam@123",

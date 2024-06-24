@@ -77,6 +77,7 @@ export const AuthOptions: AuthOptionsType = {
           name: token.name,
           email: token.email,
           accessToken: token.accessToken,
+          profileImage: token.profileImage,
         },
       };
     },
@@ -88,6 +89,7 @@ export const AuthOptions: AuthOptionsType = {
           name: user.firstname,
           email: user.email,
           accessToken: user.accessToken,
+          profileImage: user.profileImage,
         };
       }
       return token;
