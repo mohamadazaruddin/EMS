@@ -1,7 +1,7 @@
 "use client";
 import TreeChart from "@/app/components/Common/TreeChart";
 import { VStack, Grid, Flex, GridItem, Box } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import useSWR from "swr";
 interface RoleType {
   roleName: string;
@@ -13,6 +13,12 @@ export default function Chapters() {
   const { data: empData } = useSWR(
     `/api/getEmployees?teamId=&roleId=${roleId}`
   );
+
+  useEffect(() => {
+    if (roleData) {
+      setRoleId(roleData[0].id);
+    }
+  }, [roleData]);
 
   return (
     <VStack w="100%">

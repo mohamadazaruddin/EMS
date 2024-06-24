@@ -98,7 +98,7 @@ export default function EditProfile() {
         <VStack w="100%">
           <VStack w="50%" mb={10}>
             <Image src="./Images/profile.png" borderRadius="50%" />
-            <Button
+            {/* <Button
               mt={5}
               type="submit"
               bg="#17234D"
@@ -107,7 +107,7 @@ export default function EditProfile() {
               w="40%"
             >
               Upload a photo
-            </Button>
+            </Button> */}
           </VStack>
           <Box w="100%">
             <Formik
