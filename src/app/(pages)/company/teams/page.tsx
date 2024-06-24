@@ -26,9 +26,16 @@ interface TeamType {
 export default function Company() {
   const { data: teamData } = useSWR<TeamType[]>(`/api/getTeams`);
   const [teamId, setTeamId] = useState((teamData && teamData[0].id) || 0);
+
   const { data: empData } = useSWR(
     `/api/getEmployees?teamId=${teamId}&roleId=`
   );
+
+  useEffect(() => {
+    if (teamData) {
+      setTeamId(teamData[0].id);
+    }
+  }, [teamData]);
 
   return (
     <VStack w="100%">

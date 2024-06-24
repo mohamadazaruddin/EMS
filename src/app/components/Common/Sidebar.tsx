@@ -25,6 +25,7 @@ import { useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import ModelBox from "../Model";
 import ky from "ky";
+import { signOut } from "next-auth/react";
 
 const Sidebar = () => {
   const { push } = useRouter();
@@ -146,6 +147,7 @@ const Sidebar = () => {
 
   const handleLogout = async () => {
     try {
+      signOut({ callbackUrl: "/" });
       const response = ky.post(`/api/auth/logout`);
       if (await response) {
         push("/");
@@ -180,7 +182,9 @@ const Sidebar = () => {
               <Link
                 href={item.href}
                 bg={
-                  item?.href && pathname.includes(item?.href)
+                  item.options && pathname.includes("/company")
+                    ? "#3BCBBE"
+                    : item?.href && pathname.includes(item?.href)
                     ? "#3BCBBE"
                     : "#fff"
                 }

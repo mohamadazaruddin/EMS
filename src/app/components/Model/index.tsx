@@ -25,7 +25,7 @@ export default function ModelBox({
   header: React.ReactNode;
   content?: React.ReactNode;
   primaryBtnText: string;
-  primaryBtnClick: Function;
+  primaryBtnClick: () => void;
 }) {
   return (
     <>
@@ -41,7 +41,7 @@ export default function ModelBox({
               bg="#3BCBBE"
               colorScheme="teal"
               mr={3}
-              onClick={primaryBtnClick()}
+              onClick={primaryBtnClick}
             >
               {primaryBtnText}
             </Button>

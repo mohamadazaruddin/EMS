@@ -27,7 +27,7 @@ export default function GlobalHeader() {
         <TodayDate />
       </Flex>
 
-      <Box>
+      {/* <Box>
         <InputGroup bg="#F2F2FD" borderRadius="16px" w="400px">
           <Input
             placeholder="Search Employee"
@@ -40,7 +40,7 @@ export default function GlobalHeader() {
             <SearchIcon h="18px" w="18px" top="-3px" />
           </InputRightElement>
         </InputGroup>
-      </Box>
+      </Box> */}
     </HStack>
   );
 }
