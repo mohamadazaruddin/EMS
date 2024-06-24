@@ -30,7 +30,7 @@ export type SessionTokens = {
 export type User = {
   id: string;
   userName?: string;
-  profileImage?: string;
+  profileImage: string;
 };
 
 export type Appointment = {
