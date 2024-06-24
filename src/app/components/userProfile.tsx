@@ -7,7 +7,7 @@ export default function UserProfile() {
   const userData = useSession();
   return (
     <Flex alignItems="center">
-      <Avatar size="sm" name="jessie" src="./Images/peoples/jessie.svg" />
+      <Avatar size="sm" name="jessie" src={userData.data?.user?.profileImage} />
       <Box ms="2">
         <Text fontSize="sm" color="brand.800" fontWeight="normal">
           {userData.data?.user?.name}
