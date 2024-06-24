@@ -14,7 +14,6 @@ import { useSession } from "next-auth/react";
 export default function Dashboard() {
   const { data: counts } = useSWR(`/api/getDashboardData`);
   const userData = useSession();
-  console.log(process.env.NEXT_BASE_URL, "NEXT_BASE_URL");
 
   const countData = [
     {
